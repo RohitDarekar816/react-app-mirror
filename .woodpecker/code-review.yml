@@ -1,0 +1,33 @@
+when:
+  - event: manual
+    branch: master
+  - event: push
+    branch: master
+
+skip_clone: true
+
+steps:
+  - name: code-review
+    image: sh
+    commands:
+      - git clone https://admin:admin@gitea.hivefinty.com/admin/react-app.git
+      - cd react-app
+      - export QODO_API_KEY="$QODO_API_KEY"
+      - export ROCKETCHAT_WEBHOOK_URL="$ROCKETCHAT_WEBHOOK_URL"
+      - export GOOGLE_CHAT_WEBHOOK_URL="$GOOGLE_CHAT_WEBHOOK_URL"
+      - qodo code_review --exclude_files=".woodpecker/*,agents/*,node_modules/*" --ci
+      - git remote add mirror https://github.com/RohitDarekar816/react-app-mirror.git
+      - git add .
+      - git commit -m "chore:${CI_COMMIT_SHA}"
+      - git push --mirror https://$GIT_USERNAME:$GIT_TOKEN@github.com/RohitDarekar816/react-app-mirror.git
+    environment:
+      QODO_API_KEY:
+        from_secret: QODO_API_KEY
+      ROCKETCHAT_WEBHOOK_URL:
+        from_secret: ROCKETCHAT_WEBHOOK_URL
+      GOOGLE_CHAT_WEBHOOK_URL:
+        from_secret: GOOGLE_CHAT_WEBHOOK_URL
+      GIT_TOKEN:
+        from_secret: GIT_TOKEN
+      GIT_USERNAME:
+        from_secret: GIT_USERNAME
