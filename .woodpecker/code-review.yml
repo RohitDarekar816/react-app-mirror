@@ -30,3 +30,7 @@ steps:
         from_secret: GIT_TOKEN
       GIT_USERNAME:
         from_secret: GIT_USERNAME
+      GIT_COMMIT_EMAIL:
+        from_secret: GIT_COMMIT_EMAIL
+      GIT_COMMIT_NAME:
+        from_secret: GIT_COMMIT_NAME
