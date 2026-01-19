@@ -17,7 +17,7 @@ steps:
       - qodo code_review --exclude_files=".woodpecker/*,agents/*,node_modules/*" --ci
       - git remote add mirror https://github.com/RohitDarekar816/react-app-mirror.git
       - git add .
-      - git commit -m "chore:${CI_COMMIT_SHA}"
+      - git commit -m "chore:${CI_COMMIT_SHA} mirror push"
       - git push --mirror https://$GIT_USERNAME:$GIT_TOKEN@github.com/RohitDarekar816/react-app-mirror.git
     environment:
       QODO_API_KEY:
