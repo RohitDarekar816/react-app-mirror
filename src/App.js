@@ -7,7 +7,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload. I am Rohit Darekar
+          Edit <code>src/App.js</code> and save to reload. I am Rohit Darekar.
+          This is a final test to check the auto deploy.
         </p>
         <a
           className="App-link"
